@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "prebuild": "rimraf dist",
+    "prebuild": "rimraf dist && yarn doc:generate",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -21,9 +21,12 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config ormconfig.json",
     "typeorm:migrate": "yarn typeorm migration:generate -n",
-    "typeorm:run": "yarn typeorm migration:run"
+    "typeorm:run": "yarn typeorm migration:run",
+    "doc:build": "compodoc -p tsconfig.json -t docs --theme stripe",
+    "doc:serve": "compodoc -p tsconfig.json -d docs -t --theme stripe -s"
   },
   "dependencies": {
+    "@compodoc/compodoc": "^1.1.11",
     "@nestjs/common": "^7.0.0",
     "@nestjs/config": "^0.5.0",
     "@nestjs/core": "^7.0.0",

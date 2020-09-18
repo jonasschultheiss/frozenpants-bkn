@@ -17,6 +17,20 @@ The frontend part can be found [here](https://google.com).
 $ yarn install
 ```
 
+## Documentation
+
+A documentation can be generated locally by running either of the following commands.
+
+```bash
+# Build documentation
+# available in docs/index.html
+$ yarn doc:build
+
+# Build and serve documentation
+# available on localhost:8080
+$ yarn doc:serve
+```
+
 ## Setup
 
 Duplicate `.env.example` and `ormconfig.example.json`. Rename them to `.env` and `ormconfig.json` respectively. Then enter the sensitive data.
