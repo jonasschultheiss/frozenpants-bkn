@@ -30,11 +30,6 @@ export class UserController {
     return this.userService.getUser(id);
   }
 
-  // @Patch('/:id/avatar')
-  // async setAvatar(): Promise<User> {
-  //   return this.userService.setAvatar();
-  // }
-
   @Delete('/:id')
   async delete(@Param('id', ParseIntPipe) id: number): Promise<void> {
     return this.userService.deleteUser(id);

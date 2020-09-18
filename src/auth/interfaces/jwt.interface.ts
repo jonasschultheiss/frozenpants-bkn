@@ -1,5 +1,4 @@
 export interface IJwtPayload {
-  _id: number;
+  id: number;
   username: string;
-  avatarPath: string;
 }

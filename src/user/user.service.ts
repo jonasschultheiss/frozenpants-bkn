@@ -22,14 +22,11 @@ export class UserService {
   }
 
   async signIn(signInDto: SignInDto): Promise<IAuthResponse> {
-    const { _id, username, avatarPath } = await this.userRepository.signIn(
-      signInDto,
-    );
+    const { id, username } = await this.userRepository.signIn(signInDto);
 
     const payload: IJwtPayload = {
-      _id,
+      id,
       username,
-      avatarPath,
     };
 
     const accessToken = await this.jwtService.signAsync(payload);
@@ -42,7 +39,9 @@ export class UserService {
   }
 
   async getUser(id: number): Promise<User> {
-    const user = await this.userRepository.findOne(id);
+    const user = await this.userRepository.findOne(id, {
+      relations: ['avatar'],
+    });
     if (!user) {
       throw new NotFoundException('User not found');
     }
@@ -50,14 +49,7 @@ export class UserService {
     return user;
   }
 
-  // async patchsomethinglol
-
   async deleteUser(id: number): Promise<void> {
-    // const result = await this.taskRepository.delete(id);
-    // if (result.affected === 0) {
-    //   throw new NotFoundException(`Task with ID "${id}" not found`);
-    // }
-
     const result = await this.userRepository.delete(id);
     if (result.affected === 0) {
       throw new NotFoundException('User not found');

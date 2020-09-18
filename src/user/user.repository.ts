@@ -19,12 +19,10 @@ export class UserRepository extends Repository<User> {
 
   async signUp(signUpDto: SignUpDto): Promise<void> {
     const { username, email, password } = signUpDto;
-
     const user = new User();
     user.username = username;
     user.email = email;
     user.password = await argon2.hash(password);
-    user.avatarPath = '';
 
     try {
       await user.save();
@@ -41,6 +39,7 @@ export class UserRepository extends Repository<User> {
   async signIn(signInDto: SignInDto): Promise<User> {
     const { username, password } = signInDto;
     const user = await this.findOne({ username });
+    console.log('UserRepository -> user', user);
 
     if (!user) {
       throw new UnauthorizedException('Bad username or password');
