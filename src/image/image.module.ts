@@ -3,8 +3,9 @@ import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MulterExtendedModule } from 'nestjs-multer-extended';
 import { AuthModule } from 'src/auth/auth.module';
+import { PostModule } from 'src/post/post.module';
+import { PostService } from 'src/post/post.service';
 import { UserModule } from 'src/user/user.module';
-import { UserRepository } from 'src/user/user.repository';
 import { UserService } from 'src/user/user.service';
 import { ImageController } from './image.controller';
 import { ImageRepository } from './image.repository';
@@ -24,11 +25,12 @@ import { ImageService } from './image.service';
       }),
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([ImageRepository, UserRepository]),
+    TypeOrmModule.forFeature([ImageRepository]),
     AuthModule,
     UserModule,
+    PostModule,
   ],
-  providers: [ImageService, UserService],
+  providers: [ImageService, UserService, PostService],
   controllers: [ImageController],
   exports: [ImageService],
 })

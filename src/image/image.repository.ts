@@ -6,7 +6,7 @@ import { Image } from './image.entity';
 
 @EntityRepository(Image)
 export class ImageRepository extends Repository<Image> {
-  async setAvatar(uploadedImage: UploadImageDto): Promise<Image> {
+  async saveImage(uploadedImage: UploadImageDto): Promise<Image> {
     const image = new Image();
     const { originalname, mimetype, original, thumb } = uploadedImage;
 

@@ -1,9 +1,11 @@
 import { Image } from 'src/image/image.entity';
+import { Post } from 'src/post/post.entity';
 import {
   BaseEntity,
   Column,
   Entity,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -25,4 +27,12 @@ export class User extends BaseEntity {
   @OneToOne(() => Image, { onDelete: 'CASCADE' })
   @JoinColumn()
   avatar: Image;
+
+  @OneToMany(
+    () => Post,
+    posts => posts.user,
+    { onDelete: 'CASCADE' },
+  )
+  @JoinColumn()
+  posts: Post[];
 }
