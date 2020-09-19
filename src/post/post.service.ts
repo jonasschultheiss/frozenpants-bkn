@@ -4,7 +4,7 @@ import { CreatePostDto } from 'src/image/dto/create-post.dto';
 import { Image } from 'src/image/image.entity';
 import { User } from 'src/user/user.entity';
 import { Post } from './post.entity';
-import { PostRepository } from './post.reporitory';
+import { PostRepository } from './post.repository';
 
 @Injectable()
 export class PostService {
