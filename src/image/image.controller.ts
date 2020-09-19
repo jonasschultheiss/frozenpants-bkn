@@ -7,6 +7,7 @@ import {
   UploadedFile,
   UseGuards,
   UseInterceptors,
+  ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AmazonS3FileInterceptor } from 'nestjs-multer-extended';
@@ -33,7 +34,7 @@ export class ImageController {
   )
   async setAvatar(
     @Param('id', ParseIntPipe) userId: number,
-    @UploadedFile() uploadedImage: UploadImageDto,
+    @UploadedFile(ValidationPipe) uploadedImage: UploadImageDto,
   ): Promise<Image> {
     return this.imageService.setAvatar(userId, uploadedImage);
   }
