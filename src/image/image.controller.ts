@@ -34,7 +34,7 @@ export class ImageController {
   )
   async setAvatar(
     @Param('id', ParseIntPipe) userId: number,
-    @UploadedFile(ValidationPipe) uploadedImage: UploadImageDto,
+    @UploadedFile() uploadedImage: UploadImageDto,
   ): Promise<Image> {
     return this.imageService.setAvatar(userId, uploadedImage);
   }
@@ -50,8 +50,9 @@ export class ImageController {
   async createPost(
     @GetUser() user: IJwtPayload,
     @UploadedFile() uploadedImage: UploadImageDto,
-    @Body() postDto: CreatePostDto,
+    @Body(ValidationPipe) postDto: CreatePostDto,
   ): Promise<Post> {
+    console.log('ImageController -> constructor -> user', user);
     return this.imageService.createPost(user.id, uploadedImage, postDto);
   }
 }

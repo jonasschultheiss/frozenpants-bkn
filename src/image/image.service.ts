@@ -11,7 +11,7 @@ import { ImageRepository } from './image.repository';
 @Injectable()
 export class ImageService {
   constructor(
-    @InjectRepository(ImageRepository)
+    @InjectRepository(Image)
     private imageRepository: ImageRepository,
     private userService: UserService,
     private postService: PostService,
@@ -38,8 +38,11 @@ export class ImageService {
     postDto: CreatePostDto,
   ): Promise<Post> {
     const user = await this.userService.getUser(userId);
+    console.log('ImageService -> user', user);
     const image = await this.imageRepository.saveImage(uploadedImage);
+    console.log('ImageService -> image', image);
     const post = await this.postService.createPost(user, image, postDto);
+    console.log('ImageService -> post', post);
     return post;
   }
 }
