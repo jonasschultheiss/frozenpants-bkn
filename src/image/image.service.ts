@@ -1,4 +1,8 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Post } from 'src/post/post.entity';
 import { PostService } from 'src/post/post.service';
@@ -37,6 +41,9 @@ export class ImageService {
     uploadedImage: UploadImageDto,
     postDto: CreatePostDto,
   ): Promise<Post> {
+    if (!uploadedImage) {
+      throw new ConflictException('No file provided');
+    }
     const user = await this.userService.getUser(userId);
     console.log('ImageService -> user', user);
     const image = await this.imageRepository.saveImage(uploadedImage);
