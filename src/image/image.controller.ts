@@ -7,6 +7,7 @@ import {
   UploadedFile,
   UseGuards,
   UseInterceptors,
+  ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AmazonS3FileInterceptor } from 'nestjs-multer-extended';
@@ -49,8 +50,9 @@ export class ImageController {
   async createPost(
     @GetUser() user: IJwtPayload,
     @UploadedFile() uploadedImage: UploadImageDto,
-    @Body() postDto: CreatePostDto,
+    @Body(ValidationPipe) postDto: CreatePostDto,
   ): Promise<Post> {
+    console.log('ImageController -> constructor -> user', user);
     return this.imageService.createPost(user.id, uploadedImage, postDto);
   }
 }

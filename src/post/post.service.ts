@@ -9,7 +9,7 @@ import { PostRepository } from './post.repository';
 @Injectable()
 export class PostService {
   constructor(
-    @InjectRepository(PostService)
+    @InjectRepository(Post)
     private postRepository: PostRepository,
   ) {}
 
