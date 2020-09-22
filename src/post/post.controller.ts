@@ -1,15 +1,18 @@
 import {
+  Body,
   Controller,
   Delete,
   Get,
   Param,
   ParseIntPipe,
+  Patch,
   Query,
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GetPostFilter } from './dto/get-post-filter.dto';
+import { PatchPostDto } from './dto/patch-post.dto';
 import { Post } from './post.entity';
 import { PostService } from './post.service';
 
@@ -33,5 +36,13 @@ export class PostController {
     @Query(ValidationPipe) filterDto: GetPostFilter,
   ): Promise<Post[]> {
     return this.postService.getPosts(filterDto);
+  }
+
+  @Patch('/:id')
+  async patchPost(
+    @Param('id', ParseIntPipe) postId: number,
+    @Body(ValidationPipe) patchDto: PatchPostDto,
+  ): Promise<Post> {
+    return this.postService.patchPost(postId, patchDto);
   }
 }
