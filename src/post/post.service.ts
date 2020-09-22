@@ -33,6 +33,13 @@ export class PostService {
     return post;
   }
 
+  async deletePost(postId: number): Promise<void> {
+    const result = await this.postRepository.delete(postId);
+    if (result.affected === 0) {
+      throw new NotFoundException();
+    }
+  }
+
   async getPosts(filterDto: GetPostFilter): Promise<Post[]> {
     return this.postRepository.getPosts(filterDto);
   }
