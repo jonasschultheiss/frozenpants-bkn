@@ -4,9 +4,12 @@ import {
   Get,
   Param,
   ParseIntPipe,
+  Query,
   UseGuards,
+  ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { GetPostFilter } from './dto/get-post-filter.dto';
 import { Post } from './post.entity';
 import { PostService } from './post.service';
 
@@ -23,5 +26,12 @@ export class PostController {
   @Delete('/:id')
   async deletePost(@Param('id', ParseIntPipe) postId: number): Promise<void> {
     return this.postService.deletePost(postId);
+  }
+
+  @Get('/')
+  async getPosts(
+    @Query(ValidationPipe) filterDto: GetPostFilter,
+  ): Promise<Post[]> {
+    return this.postService.getPosts(filterDto);
   }
 }

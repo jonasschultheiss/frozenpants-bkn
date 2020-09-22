@@ -7,6 +7,7 @@ export class CreatePostDto {
   title: string;
 
   @IsOptional()
+  @IsNotEmpty()
   @MaxLength(2000)
   @MinLength(3)
   description: string;
