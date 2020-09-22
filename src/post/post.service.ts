@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreatePostDto } from 'src/image/dto/create-post.dto';
 import { Image } from 'src/image/image.entity';
 import { User } from 'src/user/user.entity';
+import { GetPostFilter } from './dto/get-post-filter.dto';
 import { Post } from './post.entity';
 import { PostRepository } from './post.repository';
 
@@ -30,5 +31,9 @@ export class PostService {
     }
 
     return post;
+  }
+
+  async getPosts(filterDto: GetPostFilter): Promise<Post[]> {
+    return this.postRepository.getPosts(filterDto);
   }
 }
