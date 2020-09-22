@@ -1,5 +1,6 @@
 import {
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -17,5 +18,10 @@ export class PostController {
   @Get('/:id')
   async getPost(@Param('id', ParseIntPipe) postId: number): Promise<Post> {
     return this.postService.getPost(postId);
+  }
+
+  @Delete('/:id')
+  async deletePost(@Param('id', ParseIntPipe) postId: number): Promise<void> {
+    return this.postService.deletePost(postId);
   }
 }
