@@ -4,6 +4,7 @@ import { CreatePostDto } from 'src/image/dto/create-post.dto';
 import { Image } from 'src/image/image.entity';
 import { User } from 'src/user/user.entity';
 import { GetPostFilter } from './dto/get-post-filter.dto';
+import { PatchPostDto } from './dto/patch-post.dto';
 import { Post } from './post.entity';
 import { PostRepository } from './post.repository';
 
@@ -42,5 +43,9 @@ export class PostService {
 
   async getPosts(filterDto: GetPostFilter): Promise<Post[]> {
     return this.postRepository.getPosts(filterDto);
+  }
+
+  async patchPost(postId: number, patchDto: PatchPostDto): Promise<Post> {
+    return this.postRepository.patchPost(postId, patchDto);
   }
 }
