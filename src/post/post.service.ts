@@ -48,4 +48,10 @@ export class PostService {
   async patchPost(postId: number, patchDto: PatchPostDto): Promise<Post> {
     return this.postRepository.patchPost(postId, patchDto);
   }
+
+  async getPostsByUserId(userId: number): Promise<Post[]> {
+    return this.postRepository.find({
+      where: { user: { id: userId } },
+    });
+  }
 }
