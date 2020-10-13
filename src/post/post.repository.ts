@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { CreatePostDto } from 'src/image/dto/create-post.dto';
 import { Image } from 'src/image/image.entity';
+import { Tag } from 'src/tag/tag.entity';
 import { User } from 'src/user/user.entity';
 import { EntityRepository, Repository } from 'typeorm';
 import { GetPostFilter } from './dto/get-post-filter.dto';
@@ -17,6 +18,7 @@ export class PostRepository extends Repository<Post> {
     user: User,
     image: Image,
     postDto: CreatePostDto,
+    tags: Tag[],
   ): Promise<Post> {
     const { title, description } = postDto;
 
@@ -25,6 +27,7 @@ export class PostRepository extends Repository<Post> {
     post.description = description;
     post.image = image;
     post.user = user;
+    post.tags = tags;
 
     try {
       return post.save();

@@ -11,4 +11,7 @@ export class CreatePostDto {
   @MaxLength(2000)
   @MinLength(3)
   description: string;
+
+  @IsOptional()
+  tagNames: string;
 }

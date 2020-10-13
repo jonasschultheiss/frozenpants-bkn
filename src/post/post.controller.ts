@@ -15,6 +15,7 @@ import { GetPostFilter } from './dto/get-post-filter.dto';
 import { PatchPostDto } from './dto/patch-post.dto';
 import { Post } from './post.entity';
 import { PostService } from './post.service';
+import { ISinglePost } from './single-post.interface';
 
 @UseGuards(AuthGuard('jwt'))
 @Controller('posts')
@@ -22,7 +23,9 @@ export class PostController {
   constructor(private postService: PostService) {}
 
   @Get('/:id')
-  async getPost(@Param('id', ParseIntPipe) postId: number): Promise<Post> {
+  async getPost(
+    @Param('id', ParseIntPipe) postId: number,
+  ): Promise<ISinglePost> {
     return this.postService.getPost(postId);
   }
 

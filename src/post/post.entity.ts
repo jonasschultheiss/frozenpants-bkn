@@ -1,4 +1,5 @@
 import { Image } from 'src/image/image.entity';
+import { Tag } from 'src/tag/tag.entity';
 import { User } from 'src/user/user.entity';
 import {
   BaseEntity,
@@ -6,6 +7,8 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -33,4 +36,8 @@ export class Post extends BaseEntity {
     user => user.posts,
   )
   user: User;
+
+  @ManyToMany(() => Tag, { onDelete: 'CASCADE' })
+  @JoinTable()
+  tags: Tag[];
 }
