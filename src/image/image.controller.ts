@@ -39,7 +39,7 @@ export class ImageController {
     return this.imageService.setAvatar(userId, uploadedImage);
   }
 
-  @PostRoute('/image') // equal to @Post(), had to rename in import to prevent errors
+  @PostRoute('/posts') // equal to @Post(), had to rename in import to prevent errors
   @UseInterceptors(
     AmazonS3FileInterceptor('file', {
       thumbnail: { suffix: 'thumb', width: 500, height: 500 },

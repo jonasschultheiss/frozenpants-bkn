@@ -6,6 +6,8 @@ import { AuthModule } from 'src/auth/auth.module';
 import { PostModule } from 'src/post/post.module';
 import { PostRepository } from 'src/post/post.repository';
 import { PostService } from 'src/post/post.service';
+import { TagRepository } from 'src/tag/tag.repository';
+import { TagService } from 'src/tag/tag.service';
 import { UserModule } from 'src/user/user.module';
 import { UserRepository } from 'src/user/user.repository';
 import { UserService } from 'src/user/user.service';
@@ -27,12 +29,17 @@ import { ImageService } from './image.service';
       }),
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([ImageRepository, PostRepository, UserRepository]),
+    TypeOrmModule.forFeature([
+      ImageRepository,
+      PostRepository,
+      UserRepository,
+      TagRepository,
+    ]),
     AuthModule,
     UserModule,
     PostModule,
   ],
-  providers: [ImageService, UserService, PostService],
+  providers: [ImageService, UserService, PostService, TagService],
   controllers: [ImageController],
   exports: [ImageService],
 })
